@@ -1,6 +1,21 @@
 #include "philo.h"
 
 /*
+	Destroy forks
+*/
+void	destroy_forks(pthread_mutex_t **forks, int num_philos)
+{
+	int	i_fork;
+
+	i_fork = 0;
+	while (i_fork < num_philos)
+	{
+		pthread_mutex_destroy(&(*forks)[i_fork]);
+		i_fork++;
+	}
+}
+
+/*
 	Wait for all threads to finish
 */
 void	wait_for_threads(pthread_t **threads_ptr, int num_philos)

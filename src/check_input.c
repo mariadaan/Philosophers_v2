@@ -2,12 +2,21 @@
 
 int	fill_args(t_args *args, char **input)
 {
+	int	i_forks;
+
+	i_forks = 0;
 	args->num_philos = ft_atoi(input[1]);
 	if (args->num_philos < 1)
 		return (0);
 	args->time_to_die = ft_atoi(input[2]);
 	args->time_to_eat = ft_atoi(input[3]);
 	args->time_to_sleep = ft_atoi(input[4]);
+	args->forks = malloc(sizeof(pthread_mutex_t) * args->num_philos);
+	while (i_forks < args->num_philos)
+	{
+		pthread_mutex_init(&(args->forks[i_forks]), NULL);
+		i_forks++;
+	}
 	return (1);
 }
 

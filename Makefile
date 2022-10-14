@@ -1,10 +1,12 @@
 NAME =			philo
-VPATH =			./src/ ./utils/ ./obj/ ./debug
+VPATH =			./src/ ./utils/ ./lib_utils/ ./obj/ ./debug
 SRCS =			main.c				\
 				check_input.c		\
 				init.c				\
 				simulation.c		\
 				routine.c			\
+				find_fork.c			\
+				milli_to_micro.c	\
 				\
 				ft_atoi.c			\
 				is_pos_int.c		\

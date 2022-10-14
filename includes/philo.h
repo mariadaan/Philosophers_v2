@@ -20,6 +20,7 @@ typedef struct s_args
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
+	pthread_mutex_t	*forks;
 }		t_args;
 
 typedef struct s_philo
@@ -40,9 +41,14 @@ t_philo	*init_philos(t_args *args);
 void	run_simulation(t_args *args, t_philo **philos);
 void	*routine(void *arg);
 
-
-
 /* utils */
+int			i_left_fork(t_philo *philo);
+int			i_right_fork(t_philo *philo);
+long long	milli_to_micro(int milliseconds);
+
+// int		i_left_fork(int i_philo, int num_philos);
+
+/* lib_utils */
 bool	is_pos_int(char *num_str);
 bool	is_all_pos_ints(int rows, char **input);
 char	*ft_itoa(int n);
