@@ -27,23 +27,42 @@ void *routine(void *arg){
 
 	// philosopher comes to life
 	philo = arg;
+	printf("\nTHREAD %d: Started.\n", philo->i_philo);
+
 	return NULL;
 }
 
-int		create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
-{
-	int			i_philo;
-	int			result_code;
-	pthread_t	*threads;
 
-	threads = *threads_ptr;
-	threads = malloc(sizeof(pthread_t) * num_philos);
+/*
+	Wait for all threads to finish
+*/
+void	wait_for_threads(pthread_t **threads_ptr, int num_philos)
+{
+	int	i_philo;
+
 	i_philo = 0;
 	while (i_philo < num_philos)
 	{
-		// current_thread = threads[i_philo];
+		pthread_join((*threads_ptr)[i_philo], NULL);
+		i_philo++;
+	}
+}
+
+/*
+	Create a thread for every Philosopher
+	save in array of threads on heap
+*/
+int		create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
+{
+	int	i_philo;
+	int	result_code;
+
+	*threads_ptr = malloc(sizeof(pthread_t) * num_philos);
+	i_philo = 0;
+	while (i_philo < num_philos)
+	{
 		printf("IN MAIN: Creating thread %d.\n", i_philo);
-		result_code = pthread_create(&threads[i_philo], NULL, routine, &philos[i_philo]);
+		result_code = pthread_create(&(*threads_ptr)[i_philo], NULL, routine, &(*philos)[i_philo]);
 		if (result_code)
 			return(error_msg("error creating thread\n", 0));
 		i_philo++;
@@ -59,5 +78,6 @@ void	run_simulation(t_args *args, t_philo **philos)
 	// create threads and start simulation
 	if (!create_threads(&threads, philos, args->num_philos))
 		return ;
+	wait_for_threads(&threads, args->num_philos);
 
 }
