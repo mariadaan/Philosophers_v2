@@ -7,7 +7,7 @@ int	main(int argc, char **argv)
 
 	if (!save_input(argc, argv, &args))
 		return (EXITCODE_FAIL);
-	init_philos(&args, &philos);
+	philos = init_philos(&args);
 	run_simulation(&args, &philos);
 	return (EXITCODE_SUCCESS);
 }

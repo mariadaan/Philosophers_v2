@@ -36,7 +36,7 @@ typedef struct s_philo
 
 /* src */
 int		save_input(int argc, char **input, t_args *args);
-void	init_philos(t_args *args, t_philo **philos);
+t_philo	*init_philos(t_args *args);
 void	run_simulation(t_args *args, t_philo **philos);
 
 
