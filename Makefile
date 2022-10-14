@@ -10,7 +10,8 @@ SRCS =			main.c				\
 				is_all_pos_ints.c	\
 				ft_strcmp.c			\
 				ft_itoa.c			\
-				printvar.c
+				printvar.c			\
+				print_philos.c
 
 OBJS =			$(SRCS:.c=.o)
 OBJ_DIR =		./obj/

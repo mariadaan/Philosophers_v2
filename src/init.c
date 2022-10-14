@@ -15,14 +15,14 @@ t_philo	*init_philos(t_args *args)
 	i_philo = 0;
 	while (i_philo < args->num_philos)
 	{
-		(philos[i_philo]).i_philo = i_philo;
-		(philos[i_philo]).eaten_meals = 0;
-		(philos[i_philo]).l_fork = false;
-		(philos[i_philo]).r_fork = false;
-		(philos[i_philo]).eating = false;
-		(philos[i_philo]).sleeping = false;
-		(philos[i_philo]).dead = false;
-		(philos[i_philo]).specs = args;
+		philos[i_philo].i_philo = i_philo;
+		philos[i_philo].eaten_meals = 0;
+		philos[i_philo].l_fork = false;
+		philos[i_philo].r_fork = false;
+		philos[i_philo].eating = false;
+		philos[i_philo].sleeping = false;
+		philos[i_philo].dead = false;
+		philos[i_philo].specs = args;
 		i_philo++;
 	}
 	return (philos);

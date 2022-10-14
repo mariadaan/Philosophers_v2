@@ -54,6 +54,7 @@ int		printstr(char *name, char *str);
 int		printchar(char *name, char c);
 int		printco(char *name, int x, int y);
 void	print2darray(char **array, int height);
+void	print_philos(t_philo *philos, int num_philos);
 
 
 #endif
