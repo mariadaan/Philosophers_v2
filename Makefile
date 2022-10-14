@@ -4,6 +4,7 @@ SRCS =			main.c				\
 				check_input.c		\
 				init.c				\
 				simulation.c		\
+				routine.c			\
 				\
 				ft_atoi.c			\
 				is_pos_int.c		\
@@ -12,6 +13,7 @@ SRCS =			main.c				\
 				ft_itoa.c			\
 				ft_strlen.c			\
 				ft_putstr_fd.c		\
+				error_msg.c			\
 				printvar.c			\
 				print_philos.c
 

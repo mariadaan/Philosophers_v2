@@ -38,6 +38,8 @@ typedef struct s_philo
 int		save_input(int argc, char **input, t_args *args);
 t_philo	*init_philos(t_args *args);
 void	run_simulation(t_args *args, t_philo **philos);
+void	*routine(void *arg);
+
 
 
 /* utils */
@@ -48,6 +50,8 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		ft_atoi(const char *str);
 int		ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
+int		error_msg(char *msg, int error_code);
+
 
 
 
