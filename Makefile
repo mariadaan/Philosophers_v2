@@ -7,6 +7,7 @@ SRCS =			main.c				\
 				routine.c			\
 				find_fork.c			\
 				milli_to_micro.c	\
+				current_time.c		\
 				\
 				ft_atoi.c			\
 				is_pos_int.c		\
