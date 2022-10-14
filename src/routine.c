@@ -1,5 +1,17 @@
 #include "philo.h"
 
+bool	am_i_dead(t_philo **philo)
+{
+	long long	time_since_meal;
+	int			time_to_die_micro;
+
+	time_to_die_micro = milli_to_micro((*philo)->specs->time_to_die);
+	time_since_meal = (*philo)->time_after_meal - (*philo)->specs->start_time;
+	if (time_since_meal > time_to_die_micro)
+		return (true);
+	return (false);
+}
+
 void	eat_philo(t_philo **philo)
 {
 	// eat
@@ -10,6 +22,7 @@ void	eat_philo(t_philo **philo)
 	usleep(milli_to_micro((*philo)->specs->time_to_eat));
 	pthread_mutex_unlock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
 	pthread_mutex_unlock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
+	(*philo)->time_after_meal = current_time();
 	printf("THREAD %d: Done eating.\n", (*philo)->i_philo);
 }
 
@@ -44,7 +57,7 @@ void *routine(void *arg)
 
 		// sleep
 		sleep_philo(&philo);
-		philo->dead = true;
+		philo->dead = am_i_dead(&philo);
 		printf("\nTHREAD %d: Died\n", philo->i_philo);
 	}
 

@@ -1,11 +1,21 @@
 #include <sys/time.h>
 
-int	current_time(void)
+long long	current_time(void)
 {
-	struct timeval	current_time;
-	int				micro_seconds_time;
+	struct timeval	time_struct;
+	long long		micro_seconds_time;
 
-	gettimeofday(&current_time, NULL);
-	micro_seconds_time = (current_time.tv_sec * 1000000) + current_time.tv_usec;
+	gettimeofday(&time_struct, NULL);
+	micro_seconds_time = time_struct.tv_sec * 1000000 + time_struct.tv_usec;
 	return (micro_seconds_time);
+}
+
+int	time_since_start(int start_time)
+{
+	int	micro_seconds_time;
+	int	time_since_start;
+
+	micro_seconds_time = current_time();
+	time_since_start = micro_seconds_time - start_time;
+	return (time_since_start);
 }

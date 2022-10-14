@@ -20,7 +20,7 @@ typedef struct s_args
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
-	long long	start_time;
+	long long		start_time;
 	pthread_mutex_t	*forks;
 }		t_args;
 
@@ -28,11 +28,8 @@ typedef struct s_philo
 {
 	int		i_philo;
 	int		eaten_meals;
-	bool	l_fork;
-	bool	r_fork;
-	bool	eating;
-	bool	sleeping;
 	bool	dead;
+	int		time_after_meal;
 	t_args	*specs;
 }		t_philo;
 
@@ -47,6 +44,8 @@ int			i_left_fork(t_philo *philo);
 int			i_right_fork(t_philo *philo);
 long long	milli_to_micro(int milliseconds);
 int			current_time(void);
+int			time_since_start(int start_time);
+
 
 
 // int		i_left_fork(int i_philo, int num_philos);

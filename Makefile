@@ -1,7 +1,7 @@
 NAME =			philo
 VPATH =			./src/ ./utils/ ./lib_utils/ ./obj/ ./debug
 SRCS =			main.c				\
-				check_input.c		\
+				save_input.c		\
 				init.c				\
 				simulation.c		\
 				routine.c			\
