@@ -10,6 +10,8 @@ SRCS =			main.c				\
 				is_all_pos_ints.c	\
 				ft_strcmp.c			\
 				ft_itoa.c			\
+				ft_strlen.c			\
+				ft_putstr_fd.c		\
 				printvar.c			\
 				print_philos.c
 

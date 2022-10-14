@@ -46,6 +46,10 @@ bool	is_all_pos_ints(int rows, char **input);
 char	*ft_itoa(int n);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_atoi(const char *str);
+int		ft_strlen(const char *s);
+void	ft_putstr_fd(char *s, int fd);
+
+
 
 /* debug */
 int		printnum(char *name, int num);

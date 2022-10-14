@@ -1,0 +1,9 @@
+a.out
+test.c
+*.o
+.DS_Store
+obj
+*.a
+philo
+.vscode
+

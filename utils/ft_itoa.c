@@ -6,11 +6,12 @@
 /*   By: mdaan <mdaan@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 12:58:03 by mdaan         #+#    #+#                 */
-/*   Updated: 2022/05/05 17:47:35 by mdaan         ########   odam.nl         */
+/*   Updated: 2022/10/14 14:27:59 by mdaan         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "philo.h"
 
 static int	ft_get_len(int n)
 {
@@ -29,23 +30,6 @@ static int	ft_get_len(int n)
 			n = n / -10;
 		len++;
 	}
-	return (len);
-}
-/*
-**	Description:
-**	The strlen() function computes the length of the string s.
-**
-**	Returns:
-**	number of characters in string, excluding the terminating NULL character
-*/
-
-int	ft_strlen(const char *s)
-{
-	int	len;
-
-	len = 0;
-	while (s[len])
-		len++;
 	return (len);
 }
 
