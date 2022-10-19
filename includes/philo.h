@@ -22,6 +22,7 @@ typedef struct s_args
 	int		time_to_sleep;
 	long long		start_time;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	anyone_dead;
 }		t_args;
 
 typedef struct s_philo

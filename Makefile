@@ -51,7 +51,7 @@ re:	fclean $(NAME)
 
 # debug rules:
 debug:	all
-	./philo 3 200 400 150 3
+	./philo 20 200 400 150 3
 
 sanitize:	all
 	$(MAKE) WITH_SANITIZER=1 re

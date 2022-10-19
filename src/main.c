@@ -9,6 +9,7 @@ int	main(int argc, char **argv)
 		return (EXITCODE_FAIL);
 	philos = init_philos(&args);
 	print_philos(philos, args.num_philos);
+	printf("\nSTART SIMULATION\n");
 	run_simulation(&args, &philos);
 	return (EXITCODE_SUCCESS);
 }

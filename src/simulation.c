@@ -43,13 +43,13 @@ int		create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
 	i_philo = 0;
 	while (i_philo < num_philos)
 	{
-		printf("IN MAIN: Creating thread %d.\n", i_philo);
+		// printf("IN MAIN: Creating thread %d.\n", i_philo);
 		result_code = pthread_create(&(*threads_ptr)[i_philo], NULL, routine, &(*philos)[i_philo]);
 		if (result_code)
 			return(error_msg("error creating thread\n", 0));
 		i_philo++;
 	}
-	printf("IN MAIN: All threads are created.\n");
+	// printf("IN MAIN: All threads are created.\n");
 	return (1);
 }
 
