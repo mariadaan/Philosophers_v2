@@ -2,17 +2,23 @@
 
 void	eat_philo(t_philo **philo)
 {
-	// eat
+	// get forks
 	pthread_mutex_lock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
 	// checken of iemand dood is
 	protected_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
 	pthread_mutex_lock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
 	// checken of iemand dood is
 	protected_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
+
+	// eat for time_to_eat milliseconds
 	protected_print(EATING, (*philo)->specs, (*philo)->i_philo + 1);
 	usleep(milli_to_micro((*philo)->specs->time_to_eat));
+
+	// put forks back
 	pthread_mutex_unlock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
 	pthread_mutex_unlock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
+
+	// save time after last meal in philo data
 	(*philo)->time_after_meal = current_time();
 }
 
@@ -34,7 +40,6 @@ void *routine(void *arg)
 	// philosopher comes to life
 	philo = arg;
 	num_philos = philo->specs->num_philos;
-	// printf("\nphilo %d: Started.\n", philo->i_philo);
 	while (!philo->dead)
 	{
 		// think
@@ -48,7 +53,6 @@ void *routine(void *arg)
 		// sleep
 		sleep_philo(&philo);
 		philo->dead = am_i_dead(&philo);
-		protected_print(DIED, philo->specs, philo->i_philo + 1);
 	}
 
 	return (NULL);

@@ -51,10 +51,10 @@ re:	fclean $(NAME)
 
 # debug rules:
 debug:	all
-	./philo 21 200 400 150 3
+	./philo 3 200 200 300 3
 
 sanitize:	all
 	$(MAKE) WITH_SANITIZER=1 re
-	./philo 6000 200 400 150 3
+	./philo 6 200 400 150 3
 
 .PHONY: all clean fclean re

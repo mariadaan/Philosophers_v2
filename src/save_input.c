@@ -17,6 +17,8 @@ int	fill_args(t_args *args, char **input)
 		pthread_mutex_init(&(args->forks[i_forks]), NULL);
 		i_forks++;
 	}
+	pthread_mutex_init(&(args->death_mutex), NULL);
+	args->anyone_dead = false;
 	args->start_time = current_time();
 	return (1);
 }

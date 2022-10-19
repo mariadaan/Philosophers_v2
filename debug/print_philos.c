@@ -20,3 +20,13 @@ void	print_philos(t_philo *philos, int num_philos)
 		i++;
 	}
 }
+
+void	print_args(t_args args)
+{
+	printf("----------------------------------\n");
+	printnum("num_philos", args.num_philos);
+	printnum("time_to_die", args.time_to_die);
+	printnum("time_to_eat", args.time_to_eat);
+	printnum("time_to_sleep", args.time_to_sleep);
+	printf("----------------------------------\n");
+}

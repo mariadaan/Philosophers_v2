@@ -13,7 +13,7 @@
 
 # define THREAD_LIMIT 8000
 
-typedef enum e_type
+enum e_type
 {
 	FORK,
 	EATING,
@@ -53,10 +53,12 @@ void	*routine(void *arg);
 int			i_left_fork(t_philo *philo);
 int			i_right_fork(t_philo *philo);
 long long	milli_to_micro(int milliseconds);
-int			current_time(void);
+int			micro_to_milli(long long microseconds);
+long long	current_time(void);
 int			time_since_start(int start_time);
 bool		am_i_dead(t_philo **philo);
 void		protected_print(int message_enum, t_args *args, int philo_num);
+
 
 
 
@@ -83,6 +85,8 @@ int		printchar(char *name, char c);
 int		printco(char *name, int x, int y);
 void	print2darray(char **array, int height);
 void	print_philos(t_philo *philos, int num_philos);
+void	print_args(t_args args);
+
 
 
 #endif
