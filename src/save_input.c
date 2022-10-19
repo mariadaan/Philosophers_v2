@@ -6,7 +6,7 @@ int	fill_args(t_args *args, char **input)
 
 	i_forks = 0;
 	args->num_philos = ft_atoi(input[1]);
-	if (args->num_philos < 1)
+	if (args->num_philos < 1 || args->num_philos > THREAD_LIMIT)
 		return (0);
 	args->time_to_die = ft_atoi(input[2]);
 	args->time_to_eat = ft_atoi(input[3]);

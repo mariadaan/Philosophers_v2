@@ -6,8 +6,8 @@ SRCS =			main.c				\
 				simulation.c		\
 				routine.c			\
 				find_fork.c			\
-				milli_to_micro.c	\
-				current_time.c		\
+				time_utils.c		\
+				death_check.c		\
 				\
 				ft_atoi.c			\
 				is_pos_int.c		\
@@ -23,13 +23,13 @@ SRCS =			main.c				\
 OBJS =			$(SRCS:.c=.o)
 OBJ_DIR =		./obj/
 INCL_DIR =		 ./includes
-CFLAGS =		-fsanitize=address -Wall -Werror -Wextra -I${INCL_DIR}
+CFLAGS =		-fsanitize=thread -Wall -Werror -Wextra -I${INCL_DIR}
 CC =			gcc
 
 ifdef WITH_SANITIZER
 	CFLAGS =	-fsanitize=thread -g -Wall -Wextra -I${INCL_DIR}
 else
-	CFLAGS =	-fsanitize=address -g -Wall -Wextra -I${INCL_DIR}
+	CFLAGS =	-fsanitize=thread -g -Wall -Wextra -I${INCL_DIR}
 endif
 
 all: $(NAME)
@@ -51,10 +51,10 @@ re:	fclean $(NAME)
 
 # debug rules:
 debug:	all
-	./philo 20 200 400 150 3
+	./philo 21 200 400 150 3
 
 sanitize:	all
 	$(MAKE) WITH_SANITIZER=1 re
-	./philo 3 200 400 150 3
+	./philo 6000 200 400 150 3
 
 .PHONY: all clean fclean re

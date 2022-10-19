@@ -11,8 +11,16 @@
 # define EXITCODE_SUCCESS 0
 # define EXITCODE_FAIL 1
 
-#define AVAILABLE 1
-#define TAKEN 0
+# define THREAD_LIMIT 8000
+
+typedef enum e_type
+{
+	FORK,
+	EATING,
+	SLEEPING,
+	THINKING,
+	DIED,
+}		t_message;
 
 typedef struct s_args
 {
@@ -22,7 +30,8 @@ typedef struct s_args
 	int		time_to_sleep;
 	long long		start_time;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	anyone_dead;
+	pthread_mutex_t	death_mutex;
+	bool	anyone_dead;
 }		t_args;
 
 typedef struct s_philo
@@ -46,6 +55,8 @@ int			i_right_fork(t_philo *philo);
 long long	milli_to_micro(int milliseconds);
 int			current_time(void);
 int			time_since_start(int start_time);
+bool		am_i_dead(t_philo **philo);
+void		protected_print(int message_enum, t_args *args, int philo_num);
 
 
 

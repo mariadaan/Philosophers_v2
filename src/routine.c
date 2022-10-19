@@ -1,34 +1,24 @@
 #include "philo.h"
 
-bool	am_i_dead(t_philo **philo)
-{
-	long long	time_since_meal;
-	int			time_to_die_micro;
-
-	time_to_die_micro = milli_to_micro((*philo)->specs->time_to_die);
-	time_since_meal = (*philo)->time_after_meal - (*philo)->specs->start_time;
-	if (time_since_meal > time_to_die_micro)
-		return (true);
-	return (false);
-}
-
 void	eat_philo(t_philo **philo)
 {
 	// eat
 	pthread_mutex_lock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
+	// checken of iemand dood is
+	protected_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
 	pthread_mutex_lock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
-	printf("philo %d: Start eating\n", (*philo)->i_philo);
-	printf("philo %d: Will be eating for %d milliseconds.\n", (*philo)->i_philo, (*philo)->specs->time_to_eat);	
+	// checken of iemand dood is
+	protected_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
+	protected_print(EATING, (*philo)->specs, (*philo)->i_philo + 1);
 	usleep(milli_to_micro((*philo)->specs->time_to_eat));
 	pthread_mutex_unlock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
 	pthread_mutex_unlock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
 	(*philo)->time_after_meal = current_time();
-	printf("philo %d: Done eating.\n", (*philo)->i_philo);
 }
 
 void	sleep_philo(t_philo **philo)
 {
-	printf("philo %d: Will be sleeping for %d milliseconds.\n", (*philo)->i_philo, (*philo)->specs->time_to_sleep);
+	protected_print(SLEEPING, (*philo)->specs, (*philo)->i_philo + 1);
 	usleep(milli_to_micro((*philo)->specs->time_to_sleep));
 }
 
@@ -48,7 +38,7 @@ void *routine(void *arg)
 	while (!philo->dead)
 	{
 		// think
-		printf("philo %d: Will be thinking for ??? seconds\n", philo->i_philo);
+		protected_print(THINKING, philo->specs, philo->i_philo + 1);
 		if (philo->i_philo % 2 == 0)
 			usleep(100);
 
@@ -58,10 +48,8 @@ void *routine(void *arg)
 		// sleep
 		sleep_philo(&philo);
 		philo->dead = am_i_dead(&philo);
-		printf("philo %d: Died\n", philo->i_philo);
+		protected_print(DIED, philo->specs, philo->i_philo + 1);
 	}
-
-	printf("philo %d: Ended.\n", philo->i_philo);
 
 	return (NULL);
 }
