@@ -5,7 +5,7 @@ long long	milli_to_micro(int milliseconds)
 {
 	long long	microseconds;
 	
-	microseconds = milliseconds * 1000;
+	microseconds = (long long)milliseconds * 1000;
 	return (microseconds);
 }
 
@@ -33,10 +33,10 @@ long long	current_time(void)
 /*
 	time since start of simulation in microseconds
 */
-int	time_since_start(int start_time)
+long long	time_since_start(long long start_time)
 {
-	int	micro_seconds_time;
-	int	time_since_start;
+	long long	micro_seconds_time;
+	long long	time_since_start;
 
 	micro_seconds_time = current_time();
 	time_since_start = micro_seconds_time - start_time;

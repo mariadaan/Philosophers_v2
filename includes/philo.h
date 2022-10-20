@@ -28,6 +28,9 @@ typedef struct s_args
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
+	long long		time_to_die_micro;
+	long long		time_to_eat_micro;
+	long long		time_to_sleep_micro;
 	long long		start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	death_mutex;
@@ -39,7 +42,7 @@ typedef struct s_philo
 	int		i_philo;
 	int		eaten_meals;
 	bool	dead;
-	int		time_after_meal;
+	long long		time_after_meal;
 	t_args	*specs;
 }		t_philo;
 
@@ -55,7 +58,7 @@ int			i_right_fork(t_philo *philo);
 long long	milli_to_micro(int milliseconds);
 int			micro_to_milli(long long microseconds);
 long long	current_time(void);
-int			time_since_start(int start_time);
+long long	time_since_start(long long start_time);
 bool		am_i_dead(t_philo **philo);
 void		protected_print(int message_enum, t_args *args, int philo_num);
 
@@ -79,6 +82,7 @@ int		error_msg(char *msg, int error_code);
 
 /* debug */
 int		printnum(char *name, int num);
+int		printlong(char *name, long long num);
 int		printfloat(char *name, float num);
 int		printstr(char *name, char *str);
 int		printchar(char *name, char c);
@@ -86,6 +90,7 @@ int		printco(char *name, int x, int y);
 void	print2darray(char **array, int height);
 void	print_philos(t_philo *philos, int num_philos);
 void	print_args(t_args args);
+
 
 
 

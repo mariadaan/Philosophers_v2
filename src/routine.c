@@ -20,6 +20,7 @@ void	eat_philo(t_philo **philo)
 
 	// save time after last meal in philo data
 	(*philo)->time_after_meal = current_time();
+
 }
 
 void	sleep_philo(t_philo **philo)
@@ -45,7 +46,7 @@ void *routine(void *arg)
 		// think
 		protected_print(THINKING, philo->specs, philo->i_philo + 1);
 		if (philo->i_philo % 2 == 0)
-			usleep(100);
+			usleep(2);
 
 		// eat
 		eat_philo(&philo);

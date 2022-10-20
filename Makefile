@@ -1,7 +1,6 @@
 NAME =			philo
 VPATH =			./src/ ./utils/ ./lib_utils/ ./obj/ ./debug
 SRCS =			main.c				\
-				save_input.c		\
 				init.c				\
 				simulation.c		\
 				routine.c			\
@@ -51,7 +50,7 @@ re:	fclean $(NAME)
 
 # debug rules:
 debug:	all
-	./philo 3 200 200 300 3
+	./philo 7 200 200 300 3
 
 sanitize:	all
 	$(MAKE) WITH_SANITIZER=1 re

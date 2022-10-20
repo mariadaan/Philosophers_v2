@@ -11,6 +11,17 @@ int	printnum(char *name, int num)
 	return (ret);
 }
 
+int	printlong(char *name, long long num)
+{
+	int	ret;
+
+	ret = 0;
+	if (name)
+		ret = printf("%-20s", name);
+	ret += printf("%lld\n", num);
+	return (ret);
+}
+
 int	printfloat(char *name, float num)
 {
 	int	ret;

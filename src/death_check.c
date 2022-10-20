@@ -3,18 +3,18 @@
 bool	am_i_dead(t_philo **philo)
 {
 	long long	time_since_meal;
-	int			time_to_die_micro;
+	long long	time_to_die_micro;
 
 	time_to_die_micro = milli_to_micro((*philo)->specs->time_to_die);
 	time_since_meal = (*philo)->time_after_meal - (*philo)->specs->start_time;
+	// printlong("time_since_meal", time_since_meal);
+	// printlong("time_to_die_micro", time_to_die_micro);
 	if (time_since_meal > time_to_die_micro)
 	{
-		printf("HALLO?\n\n");
-		// WAAROM KOMT NIEMAND HIER!? TESTEN!!
+		protected_print(DIED, (*philo)->specs, (*philo)->i_philo + 1);
 		pthread_mutex_lock(&((*philo)->specs->death_mutex));
 		(*philo)->specs->anyone_dead = true;
 		pthread_mutex_unlock(&((*philo)->specs->death_mutex));
-		protected_print(DIED, (*philo)->specs, (*philo)->i_philo + 1);
 		return (true);
 	}
 	return (false);
