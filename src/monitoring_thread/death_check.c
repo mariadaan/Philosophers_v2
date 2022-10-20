@@ -31,7 +31,6 @@ bool	death_check(t_args *args)
 	pthread_mutex_lock(&(args->death_mutex));
 	if (args->anyone_dead)
 	{
-		printf("\n\nsomeone died\n\n");
 		return (true); //stop simulation
 	}
 	pthread_mutex_unlock(&(args->death_mutex));
@@ -41,6 +40,16 @@ bool	death_check(t_args *args)
 
 void *monitor_deaths(void *arg)
 {
-	
-	printf("do nothing\n");
+	t_args	*specs;
+
+	specs = arg;
+	while (1)
+	{
+		if (death_check(specs))
+		{
+			end_simulation(specs);
+			break ;
+		}
+	}
+	return (NULL);
 }

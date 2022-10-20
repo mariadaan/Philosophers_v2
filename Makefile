@@ -4,6 +4,7 @@ VPATH =			./src/ ./src/init ./src/main_thread ./src/monitoring_thread \
 SRCS =			main.c				\
 				init_input.c		\
 				start_simulation.c	\
+				end_simulation.c	\
 				routine.c			\
 				find_fork.c			\
 				time_utils.c		\

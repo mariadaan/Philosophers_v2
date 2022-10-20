@@ -45,11 +45,13 @@ void *routine(void *arg)
 	{
 		// think
 		formatted_print(THINKING, philo->specs, philo->i_philo + 1);
+		philo->dead = am_i_dead(&philo);
 		if (philo->i_philo % 2 == 0)
 			usleep(2);
-
+		philo->dead = am_i_dead(&philo);
 		// eat
 		eat_philo(&philo);
+		philo->dead = am_i_dead(&philo);
 
 		// sleep
 		sleep_philo(&philo);
