@@ -55,6 +55,8 @@ int	fill_args(t_args *args, char **input)
 	Returns
 	- 0 if input is not valid
 	- 1 if input is valid
+
+	if valid, save all input in args
 */
 int	save_input(int argc, char **input, t_args *args)
 {

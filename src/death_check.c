@@ -11,7 +11,7 @@ bool	am_i_dead(t_philo **philo)
 	// printlong("time_to_die_micro", time_to_die_micro);
 	if (time_since_meal > time_to_die_micro)
 	{
-		protected_print(DIED, (*philo)->specs, (*philo)->i_philo + 1);
+		formatted_print(DIED, (*philo)->specs, (*philo)->i_philo + 1);
 		pthread_mutex_lock(&((*philo)->specs->death_mutex));
 		(*philo)->specs->anyone_dead = true;
 		pthread_mutex_unlock(&((*philo)->specs->death_mutex));
@@ -36,28 +36,4 @@ bool	death_check(t_args *args)
 	}
 	pthread_mutex_unlock(&(args->death_mutex));
 	return (false);
-}
-
-/*
-	timestamp_in_ms X has taken a fork
-	timestamp_in_ms X is eating
-	timestamp_in_ms X is sleeping
-	timestamp_in_ms X is thinking
-	timestamp_in_ms X died
-*/
-void	protected_print(int message_enum, t_args *args, int philo_num)
-{
-	long long	timestamp_in_ms;
-	const char	*print_msg_lst[]
-		= {
-		" has taken a fork",
-		" is eating",
-		" is sleeping",
-		" is thinking",
-		" died"
-	};
-
-	timestamp_in_ms = time_since_start(args->start_time);
-	timestamp_in_ms = micro_to_milli(timestamp_in_ms);
-	printf("%-8d %d %s\n", (int)timestamp_in_ms, philo_num, (char *)print_msg_lst[message_enum]);
 }

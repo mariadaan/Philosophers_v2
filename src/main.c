@@ -8,7 +8,6 @@ int	main(int argc, char **argv)
 	if (!save_input(argc, argv, &args))
 		return (EXITCODE_FAIL);
 	philos = init_philos(&args);
-	// print_philos(philos, args.num_philos);
 	print_args(args);
 	printf("\nSTART SIMULATION\n");
 	run_simulation(&args, &philos);
