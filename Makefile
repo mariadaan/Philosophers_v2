@@ -53,7 +53,10 @@ re:	fclean $(NAME)
 
 # debug rules:
 debug:	all
-	./philo 7 200 200 300 3
+	./philo 3 3000 200 300 3
+
+# to do: zorgen dat ie oneindig door blijft gaan bij een lange time to die
+# nu stopt ie altijd na dat aantal seconden.
 
 sanitize:	all
 	$(MAKE) WITH_SANITIZER=1 re

@@ -2,13 +2,33 @@
 
 void	eat_philo(t_philo **philo)
 {
+	if (death_check((*philo)->specs))
+		return ;
 	// get forks
 	pthread_mutex_lock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
 	// checken of iemand dood is
+	am_i_dead(philo);
+	if (death_check((*philo)->specs))
+	{
+		pthread_mutex_unlock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
+		return ;
+	}
+	// alleen printen dat ie vork gepakt heeft als er niemand dood is
 	formatted_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
+
+
 	pthread_mutex_lock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
 	// checken of iemand dood is
+	am_i_dead(philo);
+	if (death_check((*philo)->specs))
+	{
+		pthread_mutex_unlock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
+		pthread_mutex_unlock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
+		return ;
+	}
+	// alleen printen dat ie vork gepakt heeft als er niemand dood is
 	formatted_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
+
 
 	// eat for time_to_eat milliseconds
 	formatted_print(EATING, (*philo)->specs, (*philo)->i_philo + 1);
@@ -25,6 +45,9 @@ void	eat_philo(t_philo **philo)
 
 void	sleep_philo(t_philo **philo)
 {
+	am_i_dead(philo);
+	if (death_check((*philo)->specs))
+		return ;
 	formatted_print(SLEEPING, (*philo)->specs, (*philo)->i_philo + 1);
 	usleep(milli_to_micro((*philo)->specs->time_to_sleep));
 }
@@ -41,22 +64,26 @@ void *routine(void *arg)
 	// philosopher comes to life
 	philo = arg;
 	num_philos = philo->specs->num_philos;
-	while (!philo->dead)
+	while (!death_check(philo->specs))
 	{
 		// think
+		am_i_dead(&philo);
+		if (death_check(philo->specs))
+		{
+			printf("%d: routine finished\n", philo->i_philo);
+			return (NULL);
+		}
 		formatted_print(THINKING, philo->specs, philo->i_philo + 1);
-		philo->dead = am_i_dead(&philo);
+
+		// avoid death lock by making even numbers wait a tiny bit
 		if (philo->i_philo % 2 == 0)
-			usleep(2);
-		philo->dead = am_i_dead(&philo);
+			usleep(200);
+
 		// eat
 		eat_philo(&philo);
-		philo->dead = am_i_dead(&philo);
 
 		// sleep
 		sleep_philo(&philo);
-		philo->dead = am_i_dead(&philo);
 	}
-
 	return (NULL);
 }

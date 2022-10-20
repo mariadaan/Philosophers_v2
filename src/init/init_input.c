@@ -16,7 +16,7 @@ t_philo	*init_philos(t_args *specs)
 	{
 		philos[i_philo].i_philo = i_philo;
 		philos[i_philo].eaten_meals = 0;
-		philos[i_philo].time_after_meal = 0;
+		philos[i_philo].time_after_meal = specs->start_time;
 		philos[i_philo].dead = false;
 		philos[i_philo].specs = specs;
 		i_philo++;

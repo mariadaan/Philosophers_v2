@@ -50,6 +50,7 @@ int			save_input(int argc, char **input, t_args *specs);
 t_philo		*init_philos(t_args *specs);
 void		run_simulation(t_args *specs, t_philo **philos);
 void		end_simulation(t_args *specs);
+void		wait_for_threads(pthread_t **threads_ptr, pthread_t *mon_thread, int num_philos);
 void		destroy_forks(pthread_mutex_t **forks, int num_philos);
 void		*routine(void *arg);
 void		*monitor_deaths(void *arg);
@@ -62,6 +63,8 @@ int			micro_to_milli(long long microseconds);
 long long	current_time(void);
 long long	time_since_start(long long start_time);
 bool		am_i_dead(t_philo **philo);
+bool		death_check(t_args *specs);
+
 void		formatted_print(int message_enum, t_args *specs, int philo_num);
 
 /* lib_utils */

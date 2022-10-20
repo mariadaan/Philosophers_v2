@@ -1,22 +1,6 @@
 #include "philo.h"
 
 /*
-	Wait for all threads to finish
-*/
-void	wait_for_threads(pthread_t **threads_ptr, pthread_t *mon_thread, int num_philos)
-{
-	int	i_philo;
-
-	i_philo = 0;
-	while (i_philo < num_philos)
-	{
-		pthread_join(*mon_thread, NULL);
-		pthread_join((*threads_ptr)[i_philo], NULL);
-		i_philo++;
-	}
-}
-
-/*
 	Create a monitoring thread that keeps checking whether anyone died
 */
 int		create_mon_thread(pthread_t *mon_thread, t_args *specs)

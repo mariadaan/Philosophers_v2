@@ -7,14 +7,18 @@ bool	am_i_dead(t_philo **philo)
 
 	time_to_die_micro = milli_to_micro((*philo)->specs->time_to_die);
 	time_since_meal = (*philo)->time_after_meal - (*philo)->specs->start_time;
-	// printlong("time_since_meal", time_since_meal);
-	// printlong("time_to_die_micro", time_to_die_micro);
 	if (time_since_meal > time_to_die_micro)
 	{
-		formatted_print(DIED, (*philo)->specs, (*philo)->i_philo + 1);
+		(*philo)->dead = true;
 		pthread_mutex_lock(&((*philo)->specs->death_mutex));
+		if ((*philo)->specs->anyone_dead)
+		{
+			pthread_mutex_unlock(&((*philo)->specs->death_mutex));
+			return (true);
+		}	
 		(*philo)->specs->anyone_dead = true;
 		pthread_mutex_unlock(&((*philo)->specs->death_mutex));
+		formatted_print(DIED, (*philo)->specs, (*philo)->i_philo + 1);
 		return (true);
 	}
 	return (false);
@@ -26,14 +30,15 @@ bool	am_i_dead(t_philo **philo)
 
  */
 
-bool	death_check(t_args *args)
+bool	death_check(t_args *specs)
 {
-	pthread_mutex_lock(&(args->death_mutex));
-	if (args->anyone_dead)
+	pthread_mutex_lock(&(specs->death_mutex));
+	if (specs->anyone_dead)
 	{
+		pthread_mutex_unlock(&(specs->death_mutex));
 		return (true); //stop simulation
 	}
-	pthread_mutex_unlock(&(args->death_mutex));
+	pthread_mutex_unlock(&(specs->death_mutex));
 	return (false);
 }
 
@@ -43,13 +48,13 @@ void *monitor_deaths(void *arg)
 	t_args	*specs;
 
 	specs = arg;
-	while (1)
-	{
-		if (death_check(specs))
-		{
-			end_simulation(specs);
-			break ;
-		}
-	}
+	// while (1)
+	// {
+	// 	if (death_check(specs))
+	// 	{
+	// 		end_simulation(specs);
+	// 		break ;
+	// 	}
+	// }
 	return (NULL);
 }
