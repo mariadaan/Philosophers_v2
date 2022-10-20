@@ -25,9 +25,11 @@ void	print_args(t_args args)
 {
 	printf("----------------------------------\n");
 	printnum("num_philos", args.num_philos);
+	printf("\n");
 	printnum("time_to_die", args.time_to_die);
 	printnum("time_to_eat", args.time_to_eat);
 	printnum("time_to_sleep", args.time_to_sleep);
+	printf("\n");
 	printlong("time_to_die_micro", args.time_to_die_micro);
 	printlong("time_to_eat_micro", args.time_to_eat_micro);
 	printlong("time_to_sleep_micro", args.time_to_sleep_micro);

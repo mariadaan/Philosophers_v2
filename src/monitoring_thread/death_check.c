@@ -3,11 +3,9 @@
 bool	am_i_dead(t_philo **philo)
 {
 	long long	time_since_meal;
-	long long	time_to_die_micro;
 
-	time_to_die_micro = milli_to_micro((*philo)->specs->time_to_die);
-	time_since_meal = (*philo)->time_after_meal - (*philo)->specs->start_time;
-	if (time_since_meal > time_to_die_micro)
+	time_since_meal = current_time() - (*philo)->time_after_meal;
+	if (time_since_meal > (*philo)->specs->time_to_die_micro)
 	{
 		(*philo)->dead = true;
 		pthread_mutex_lock(&((*philo)->specs->death_mutex));

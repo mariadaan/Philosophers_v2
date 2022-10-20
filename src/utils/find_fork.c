@@ -13,5 +13,7 @@ int	i_left_fork(t_philo *philo)
 
 int	i_right_fork(t_philo *philo)
 {
+	if (philo->specs->num_philos == 1)
+		return (-1);
 	return (philo->i_philo);
 }

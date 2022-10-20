@@ -16,7 +16,8 @@ void	eat_philo(t_philo **philo)
 	// alleen printen dat ie vork gepakt heeft als er niemand dood is
 	formatted_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
 
-
+	if (i_right_fork(*philo) == -1)
+		return;
 	pthread_mutex_lock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
 	// checken of iemand dood is
 	am_i_dead(philo);
@@ -40,7 +41,6 @@ void	eat_philo(t_philo **philo)
 
 	// save time after last meal in philo data
 	(*philo)->time_after_meal = current_time();
-
 }
 
 void	sleep_philo(t_philo **philo)
@@ -59,20 +59,15 @@ void	sleep_philo(t_philo **philo)
 void *routine(void *arg)
 {
 	t_philo *philo;
-	int	num_philos;
 
 	// philosopher comes to life
 	philo = arg;
-	num_philos = philo->specs->num_philos;
 	while (!death_check(philo->specs))
 	{
 		// think
 		am_i_dead(&philo);
 		if (death_check(philo->specs))
-		{
-			printf("%d: routine finished\n", philo->i_philo);
 			return (NULL);
-		}
 		formatted_print(THINKING, philo->specs, philo->i_philo + 1);
 
 		// avoid death lock by making even numbers wait a tiny bit
@@ -82,6 +77,7 @@ void *routine(void *arg)
 		// eat
 		eat_philo(&philo);
 
+		// TO DO: alleen gaan slapen als je ook echt gegeten hebt
 		// sleep
 		sleep_philo(&philo);
 	}
