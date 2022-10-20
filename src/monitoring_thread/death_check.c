@@ -37,3 +37,9 @@ bool	death_check(t_args *args)
 	pthread_mutex_unlock(&(args->death_mutex));
 	return (false);
 }
+
+
+void *monitor_deaths(void *arg)
+{
+	printf("do nothing\n");
+}

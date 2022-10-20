@@ -18,7 +18,7 @@ enum e_type
 	EATING,
 	SLEEPING,
 	THINKING,
-	DIED,
+	DIED
 };
 
 typedef struct s_args
@@ -50,6 +50,7 @@ int			save_input(int argc, char **input, t_args *args);
 t_philo		*init_philos(t_args *args);
 void		run_simulation(t_args *args, t_philo **philos);
 void		*routine(void *arg);
+void		*monitor_deaths(void *arg);
 
 /* utils */
 int			i_left_fork(t_philo *philo);
