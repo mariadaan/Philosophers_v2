@@ -7,7 +7,7 @@
 	timestamp_in_ms X is thinking
 	timestamp_in_ms X died
 */
-void	formatted_print(int message_enum, t_args *args, int philo_num)
+void	formatted_print(int message_enum, t_args *specs, int philo_num)
 {
 	long long	timestamp_in_ms;
 	const char	*print_msg_lst[]
@@ -19,7 +19,7 @@ void	formatted_print(int message_enum, t_args *args, int philo_num)
 		" died"
 	};
 
-	timestamp_in_ms = time_since_start(args->start_time);
+	timestamp_in_ms = time_since_start(specs->start_time);
 	timestamp_in_ms = micro_to_milli(timestamp_in_ms);
 	printf("%-8d %d %s\n", (int)timestamp_in_ms, philo_num, (char *)print_msg_lst[message_enum]);
 }

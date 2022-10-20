@@ -5,48 +5,48 @@
 	initialize all values
 	save user input values in specs
 */
-t_philo	*init_philos(t_args *args)
+t_philo	*init_philos(t_args *specs)
 {
 	t_philo	*philos;
 	int		i_philo;
 	
-	philos = (t_philo *)malloc(sizeof(t_philo) * args->num_philos);
+	philos = (t_philo *)malloc(sizeof(t_philo) * specs->num_philos);
 	i_philo = 0;
-	while (i_philo < args->num_philos)
+	while (i_philo < specs->num_philos)
 	{
 		philos[i_philo].i_philo = i_philo;
 		philos[i_philo].eaten_meals = 0;
 		philos[i_philo].time_after_meal = 0;
 		philos[i_philo].dead = false;
-		philos[i_philo].specs = args;
+		philos[i_philo].specs = specs;
 		i_philo++;
 	}
 	return (philos);
 }
 
-int	fill_args(t_args *args, char **input)
+int	fill_specs(t_args *specs, char **input)
 {
 	int	i_forks;
 
 	i_forks = 0;
-	args->num_philos = ft_atoi(input[1]);
-	if (args->num_philos < 1 || args->num_philos > THREAD_LIMIT)
+	specs->num_philos = ft_atoi(input[1]);
+	if (specs->num_philos < 1 || specs->num_philos > THREAD_LIMIT)
 		return (0);
-	args->time_to_die = ft_atoi(input[2]);
-	args->time_to_eat = ft_atoi(input[3]);
-	args->time_to_sleep = ft_atoi(input[4]);
-	args->time_to_die_micro = milli_to_micro(args->time_to_die);
-	args->time_to_eat_micro = milli_to_micro(args->time_to_eat);
-	args->time_to_sleep_micro = milli_to_micro(args->time_to_sleep);
-	args->forks = malloc(sizeof(pthread_mutex_t) * args->num_philos);
-	while (i_forks < args->num_philos)
+	specs->time_to_die = ft_atoi(input[2]);
+	specs->time_to_eat = ft_atoi(input[3]);
+	specs->time_to_sleep = ft_atoi(input[4]);
+	specs->time_to_die_micro = milli_to_micro(specs->time_to_die);
+	specs->time_to_eat_micro = milli_to_micro(specs->time_to_eat);
+	specs->time_to_sleep_micro = milli_to_micro(specs->time_to_sleep);
+	specs->forks = malloc(sizeof(pthread_mutex_t) * specs->num_philos);
+	while (i_forks < specs->num_philos)
 	{
-		pthread_mutex_init(&(args->forks[i_forks]), NULL);
+		pthread_mutex_init(&(specs->forks[i_forks]), NULL);
 		i_forks++;
 	}
-	pthread_mutex_init(&(args->death_mutex), NULL);
-	args->anyone_dead = false;
-	args->start_time = current_time();
+	pthread_mutex_init(&(specs->death_mutex), NULL);
+	specs->anyone_dead = false;
+	specs->start_time = current_time();
 	return (1);
 }
 
@@ -56,13 +56,13 @@ int	fill_args(t_args *args, char **input)
 	- 0 if input is not valid
 	- 1 if input is valid
 
-	if valid, save all input in args
+	if valid, save all input in specs
 */
-int	save_input(int argc, char **input, t_args *args)
+int	save_input(int argc, char **input, t_args *specs)
 {
 	if (argc < 5
 		|| !is_all_pos_ints(argc - 1, input + 1)
-		|| !fill_args(args, input))
+		|| !fill_specs(specs, input))
 	{
 		// TO DO: use write to fd 2
 		printf("%s\n", "ERROR: invalid input\n\n"

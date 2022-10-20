@@ -63,15 +63,15 @@ int		create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
 	return (1);
 }
 
-void	run_simulation(t_args *args, t_philo **philos)
+void	run_simulation(t_args *specs, t_philo **philos)
 {
 	pthread_t	*threads;
 	pthread_t	mon_thread;
 
 	// create threads and start simulation
-	if (!create_mon_thread(&mon_thread, args)
-		|| !create_threads(&threads, philos, args->num_philos))
+	if (!create_mon_thread(&mon_thread, specs)
+		|| !create_threads(&threads, philos, specs->num_philos))
 		return ;
-	wait_for_threads(&threads, &mon_thread, args->num_philos);
-	destroy_forks(&(args->forks), args->num_philos);
+	wait_for_threads(&threads, &mon_thread, specs->num_philos);
+	destroy_forks(&(specs->forks), specs->num_philos);
 }

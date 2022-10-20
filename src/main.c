@@ -2,14 +2,14 @@
 
 int	main(int argc, char **argv)
 {
-	t_args	args;
+	t_args	specs;
 	t_philo	*philos;
 
-	if (!save_input(argc, argv, &args))
+	if (!save_input(argc, argv, &specs))
 		return (EXITCODE_FAIL);
-	philos = init_philos(&args);
-	print_args(args);
+	philos = init_philos(&specs);
+	print_args(specs);
 	printf("\nSTART SIMULATION\n");
-	run_simulation(&args, &philos);
+	run_simulation(&specs, &philos);
 	return (EXITCODE_SUCCESS);
 }

@@ -41,5 +41,6 @@ bool	death_check(t_args *args)
 
 void *monitor_deaths(void *arg)
 {
+	
 	printf("do nothing\n");
 }
