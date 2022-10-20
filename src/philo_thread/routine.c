@@ -1,5 +1,7 @@
 #include "philo.h"
 
+
+// TO DO: deze functie opschonen
 void	eat_philo(t_philo **philo)
 {
 	if (death_check((*philo)->specs))
@@ -43,6 +45,8 @@ void	eat_philo(t_philo **philo)
 	(*philo)->time_after_meal = current_time();
 }
 
+
+// TO DO: usleep functie maken
 void	sleep_philo(t_philo **philo)
 {
 	am_i_dead(philo);
