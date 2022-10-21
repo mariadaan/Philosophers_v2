@@ -22,11 +22,15 @@ int		create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
 {
 	int	i_philo;
 	int	result_code;
+	long long start_time;
 
 	*threads_ptr = malloc(sizeof(pthread_t) * num_philos);
+	start_time = current_time();
+	(*philos)[0].specs->start_time = start_time;
 	i_philo = 0;
 	while (i_philo < num_philos)
 	{
+		(*philos)[i_philo].time_after_meal = start_time;
 		result_code = pthread_create(&(*threads_ptr)[i_philo], NULL, routine, &(*philos)[i_philo]);
 		if (result_code)
 			return(error_msg("error creating thread\n", 0));

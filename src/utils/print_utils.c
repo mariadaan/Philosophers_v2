@@ -16,7 +16,9 @@ void	formatted_print(int message_enum, t_args *specs, int philo_num)
 		" is eating",
 		" is sleeping",
 		" is thinking",
-		" died"
+		" died",
+		" is done sleeping",
+		" is done eating",
 	};
 
 	timestamp_in_ms = time_since_start(specs->start_time);

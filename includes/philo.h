@@ -18,7 +18,9 @@ enum e_type
 	EATING,
 	SLEEPING,
 	THINKING,
-	DIED
+	DIED,
+	DONE_SLEEPING,
+	DONE_EATING,
 };
 
 typedef struct s_args
@@ -62,6 +64,8 @@ long long	milli_to_micro(int milliseconds);
 int			micro_to_milli(long long microseconds);
 long long	current_time(void);
 long long	time_since_start(long long start_time);
+void		usleep_better(long long microseconds);
+
 bool		am_i_dead(t_philo **philo);
 bool		death_check(t_args *specs);
 

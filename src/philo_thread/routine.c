@@ -35,7 +35,7 @@ void	eat_philo(t_philo **philo)
 
 	// eat for time_to_eat milliseconds
 	formatted_print(EATING, (*philo)->specs, (*philo)->i_philo + 1);
-	usleep(milli_to_micro((*philo)->specs->time_to_eat));
+	usleep_better(milli_to_micro((*philo)->specs->time_to_eat));
 
 	// put forks back
 	pthread_mutex_unlock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
@@ -43,17 +43,19 @@ void	eat_philo(t_philo **philo)
 
 	// save time after last meal in philo data
 	(*philo)->time_after_meal = current_time();
+	formatted_print(DONE_EATING, (*philo)->specs, (*philo)->i_philo + 1);
 }
 
 
-// TO DO: usleep functie maken
+// TO DO: usleep_better functie maken
 void	sleep_philo(t_philo **philo)
 {
 	am_i_dead(philo);
 	if (death_check((*philo)->specs))
 		return ;
 	formatted_print(SLEEPING, (*philo)->specs, (*philo)->i_philo + 1);
-	usleep(milli_to_micro((*philo)->specs->time_to_sleep));
+	usleep_better(milli_to_micro((*philo)->specs->time_to_sleep));
+	formatted_print(DONE_SLEEPING, (*philo)->specs, (*philo)->i_philo + 1);
 }
 
 /*
@@ -76,7 +78,7 @@ void *routine(void *arg)
 
 		// avoid death lock by making even numbers wait a tiny bit
 		if (philo->i_philo % 2 == 0)
-			usleep(200);
+			usleep_better(200);
 
 		// eat
 		eat_philo(&philo);

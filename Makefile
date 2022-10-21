@@ -53,7 +53,7 @@ re:	fclean $(NAME)
 
 # debug rules:
 debug:	all
-	./philo 1 300 200 300 3
+	./philo 8 205 200 200 3
 
 # to do: zorgen dat ie oneindig door blijft gaan bij een lange time to die
 # nu stopt ie altijd na dat aantal seconden.

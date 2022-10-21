@@ -42,3 +42,12 @@ long long	time_since_start(long long start_time)
 	time_since_start = micro_seconds_time - start_time;
 	return (time_since_start);
 }
+
+void	usleep_better(long long microseconds)
+{
+	long long	start_time;
+
+	start_time = current_time();
+	while (current_time() - start_time < microseconds)
+		usleep(250);
+}
