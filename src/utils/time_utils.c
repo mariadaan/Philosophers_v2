@@ -4,15 +4,15 @@
 long long	milli_to_micro(int milliseconds)
 {
 	long long	microseconds;
-	
+
 	microseconds = (long long)milliseconds * 1000;
 	return (microseconds);
 }
 
-int		micro_to_milli(long long microseconds)
+int	micro_to_milli(long long microseconds)
 {
 	long long	milliseconds;
-	
+
 	milliseconds = microseconds / 1000;
 	return (milliseconds);
 }
@@ -43,6 +43,9 @@ long long	time_since_start(long long start_time)
 	return (time_since_start);
 }
 
+/*
+	Usleep has a delay. This function optimizes usleep.
+*/
 void	usleep_better(long long microseconds)
 {
 	long long	start_time;

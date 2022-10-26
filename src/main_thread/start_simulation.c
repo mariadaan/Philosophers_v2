@@ -4,11 +4,11 @@
 	Create a thread for every Philosopher
 	save in array of threads on heap
 */
-int		create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
+int	create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
 {
-	int	i_philo;
-	int	result_code;
-	long long start_time;
+	int			i_philo;
+	int			result_code;
+	long long	start_time;
 
 	*threads_ptr = malloc(sizeof(pthread_t) * num_philos);
 	start_time = current_time();
@@ -17,9 +17,10 @@ int		create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
 	while (i_philo < num_philos)
 	{
 		(*philos)[i_philo].meal_time = start_time;
-		result_code = pthread_create(&(*threads_ptr)[i_philo], NULL, routine, &(*philos)[i_philo]);
+		result_code = pthread_create(&(*threads_ptr)[i_philo], NULL,
+				routine, &(*philos)[i_philo]);
 		if (result_code)
-			return(error_msg("error creating thread\n", 0));
+			return (error_msg("error creating thread\n", 0));
 		i_philo++;
 	}
 	return (1);

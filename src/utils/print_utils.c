@@ -23,7 +23,8 @@ void	formatted_print(int message_enum, t_args *specs, int philo_num)
 
 	timestamp_in_ms = time_since_start(specs->start_time);
 	timestamp_in_ms = micro_to_milli(timestamp_in_ms);
-	printf("%-8d %d %s\n", (int)timestamp_in_ms, philo_num, (char *)print_msg_lst[message_enum]);
+	printf("%-8d %d %s\n", (int)timestamp_in_ms, philo_num,
+		(char *)print_msg_lst[message_enum]);
 }
 
 void	protected_print(int message_enum, t_philo **philo)

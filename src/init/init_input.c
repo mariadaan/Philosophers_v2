@@ -9,7 +9,7 @@ t_philo	*init_philos(t_args *specs)
 {
 	t_philo	*philos;
 	int		i_philo;
-	
+
 	philos = (t_philo *)malloc(sizeof(t_philo) * specs->num_philos);
 	i_philo = 0;
 	while (i_philo < specs->num_philos)

@@ -30,7 +30,6 @@ bool	pick_up_fork(int fork_type, t_philo **philo)
 		i_fork = i_left_fork(*philo);
 	else
 		i_fork = i_right_fork(*philo);
-
 	pthread_mutex_lock(&(*philo)->specs->forks[i_fork]);
 	am_i_dead(philo);
 	if (death_check((*philo)->specs))
