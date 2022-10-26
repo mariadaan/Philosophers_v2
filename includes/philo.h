@@ -38,7 +38,7 @@ typedef struct s_args
 	long long		time_to_eat_micro;
 	long long		time_to_sleep_micro;
 	long long		start_time;
-	pthread_mutex_t	*forks;
+	pthread_mutex_t	*forks; // malloced
 	pthread_mutex_t	death_mutex;
 	bool			anyone_dead;
 }		t_args;

@@ -11,6 +11,8 @@ int	create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
 	long long	start_time;
 
 	*threads_ptr = malloc(sizeof(pthread_t) * num_philos);
+	if (!*threads_ptr)
+		return (error_msg("error creating thread\n", 0));
 	start_time = current_time();
 	(*philos)[0].specs->start_time = start_time;
 	i_philo = 0;
@@ -53,4 +55,7 @@ void	run_simulation(t_args *specs, t_philo **philos)
 	wait_for_threads(&threads, specs->num_philos);
 	destroy_forks(&(specs->forks), specs->num_philos);
 	pthread_mutex_destroy(&(specs->death_mutex));
+	free(specs->forks);
+	free(*philos);
+	free(threads);
 }
