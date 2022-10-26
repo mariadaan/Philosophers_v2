@@ -31,7 +31,7 @@ CC =			gcc
 ifdef WITH_SANITIZER
 	CFLAGS =	-fsanitize=thread -g -Wall -Wextra -I${INCL_DIR}
 else
-	CFLAGS =	-fsanitize=thread -g -Wall -Wextra -I${INCL_DIR}
+	CFLAGS =	-Wall -Wextra -I${INCL_DIR}
 endif
 
 all: $(NAME)
@@ -53,7 +53,7 @@ re:	fclean $(NAME)
 
 # debug rules:
 debug:	all
-	./philo 8 205 200 200 3
+	./philo 3 205 200 200 3
 
 # to do: zorgen dat ie oneindig door blijft gaan bij een lange time to die
 # nu stopt ie altijd na dat aantal seconden.

@@ -4,7 +4,7 @@ bool	am_i_dead(t_philo **philo)
 {
 	long long	time_since_meal;
 
-	time_since_meal = current_time() - (*philo)->time_after_meal;
+	time_since_meal = current_time() - (*philo)->meal_time;
 	if (time_since_meal > (*philo)->specs->time_to_die_micro)
 	{
 		(*philo)->dead = true;

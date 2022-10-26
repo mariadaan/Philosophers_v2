@@ -35,6 +35,7 @@ void	eat_philo(t_philo **philo)
 
 	// eat for time_to_eat milliseconds
 	formatted_print(EATING, (*philo)->specs, (*philo)->i_philo + 1);
+	(*philo)->meal_time = current_time();
 	usleep_better(milli_to_micro((*philo)->specs->time_to_eat));
 
 	// put forks back
@@ -42,7 +43,6 @@ void	eat_philo(t_philo **philo)
 	pthread_mutex_unlock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
 
 	// save time after last meal in philo data
-	(*philo)->time_after_meal = current_time();
 	formatted_print(DONE_EATING, (*philo)->specs, (*philo)->i_philo + 1);
 }
 

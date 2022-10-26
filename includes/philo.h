@@ -43,7 +43,7 @@ typedef struct s_philo
 	int				i_philo;
 	int				eaten_meals;
 	bool			dead;
-	long long		time_after_meal;
+	long long		meal_time;
 	t_args			*specs;
 }		t_philo;
 

@@ -30,7 +30,7 @@ int		create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
 	i_philo = 0;
 	while (i_philo < num_philos)
 	{
-		(*philos)[i_philo].time_after_meal = start_time;
+		(*philos)[i_philo].meal_time = start_time;
 		result_code = pthread_create(&(*threads_ptr)[i_philo], NULL, routine, &(*philos)[i_philo]);
 		if (result_code)
 			return(error_msg("error creating thread\n", 0));
@@ -39,12 +39,14 @@ int		create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
 	return (1);
 }
 
+/*
+	Create threads and start simulation
+*/
 void	run_simulation(t_args *specs, t_philo **philos)
 {
 	pthread_t	*threads;
 	pthread_t	mon_thread;
 
-	// create threads and start simulation
 	if (!create_mon_thread(&mon_thread, specs)
 		|| !create_threads(&threads, philos, specs->num_philos))
 		return ;
