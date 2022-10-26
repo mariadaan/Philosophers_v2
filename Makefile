@@ -6,7 +6,7 @@ SRCS =			main.c				\
 				start_simulation.c	\
 				end_simulation.c	\
 				routine.c			\
-				find_fork.c			\
+				fork_utils.c		\
 				time_utils.c		\
 				print_utils.c		\
 				philo_utils.c		\
@@ -61,6 +61,5 @@ debug:	all
 
 sanitize:	all
 	$(MAKE) WITH_SANITIZER=1 re
-	./philo 6 200 400 150 3
 
 .PHONY: all clean fclean re

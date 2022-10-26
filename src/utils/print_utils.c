@@ -28,15 +28,12 @@ void	formatted_print(int message_enum, t_args *specs, int philo_num)
 
 void	protected_print(int message_enum, t_philo **philo)
 {
-	// pthread_mutex_lock(&((*philo)->specs->print_mutex));
 	pthread_mutex_lock(&((*philo)->specs->death_mutex));
 	if ((*philo)->specs->anyone_dead)
 	{
 		pthread_mutex_unlock(&((*philo)->specs->death_mutex));
-		// pthread_mutex_unlock(&((*philo)->specs->print_mutex));
 		return ;
 	}
 	formatted_print(message_enum, (*philo)->specs, (*philo)->i_philo + 1);
-	// pthread_mutex_unlock(&((*philo)->specs->print_mutex));
 	pthread_mutex_unlock(&((*philo)->specs->death_mutex));
 }

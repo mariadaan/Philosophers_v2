@@ -6,48 +6,21 @@ void	eat_philo(t_philo **philo)
 {
 	if (death_check((*philo)->specs))
 		return ;
-	// get forks
-	pthread_mutex_lock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
-	// checken of iemand dood is
-	am_i_dead(philo);
-	if (death_check((*philo)->specs))
-	{
-		pthread_mutex_unlock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
+
+	if (!pick_up_fork(LEFT_FORK, philo))
 		return ;
-	}
-	// alleen printen dat ie vork gepakt heeft als er niemand dood is
-	// formatted_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
-	protected_print(FORK, philo);
 
 	if ((*philo)->specs->num_philos == 1)
-	{
-		usleep_better((*philo)->specs->time_to_die_micro);
-		die(philo);
-		return;
-	}
-	pthread_mutex_lock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
-	// checken of iemand dood is
-	am_i_dead(philo);
-	if (death_check((*philo)->specs))
-	{
-		pthread_mutex_unlock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
-		pthread_mutex_unlock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
+		return (philo_starve(philo));
+
+	if (!pick_up_fork(RIGHT_FORK, philo))
 		return ;
-	}
-	// alleen printen dat ie vork gepakt heeft als er niemand dood is
-	// formatted_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
-	protected_print(FORK, philo);
 
-
-	// eat for time_to_eat milliseconds
-	// formatted_print(EATING, (*philo)->specs, (*philo)->i_philo + 1);
 	protected_print(EATING, philo);
 	(*philo)->meal_time = current_time();
 	philo_eat(philo);
 
-	// put forks back
-	pthread_mutex_unlock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
-	pthread_mutex_unlock(&(*philo)->specs->forks[i_right_fork(*philo)]); // right fork
+	put_back_forks(philo);
 }
 
 
@@ -60,7 +33,6 @@ void	sleep_philo(t_philo **philo)
 	am_i_dead(philo);
 	if (death_check((*philo)->specs))
 		return ;
-	// formatted_print(SLEEPING, (*philo)->specs, (*philo)->i_philo + 1);
 	protected_print(SLEEPING, philo);
 	philo_sleep(philo);
 }
@@ -80,7 +52,6 @@ void *routine(void *arg)
 		am_i_dead(&philo);
 		if (death_check(philo->specs))
 			return (NULL);
-		// formatted_print(THINKING, philo->specs, philo->i_philo + 1);
 		protected_print(THINKING, &philo);
 		// avoid death lock by making even numbers wait a tiny bit
 		if (philo->i_philo % 2 == 0)

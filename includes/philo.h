@@ -12,6 +12,11 @@
 
 # define THREAD_LIMIT 8000
 
+# define LEFT_FORK 1
+# define RIGHT_FORK 2
+
+
+
 enum e_type
 {
 	FORK,
@@ -35,8 +40,6 @@ typedef struct s_args
 	long long		start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	death_mutex;
-	pthread_mutex_t	print_mutex;
-
 	bool			anyone_dead;
 }		t_args;
 
@@ -60,6 +63,13 @@ void		*routine(void *arg);
 /* utils */
 int			i_left_fork(t_philo *philo);
 int			i_right_fork(t_philo *philo);
+bool		get_left_fork(t_philo **philo);
+bool		get_right_fork(t_philo **philo);
+bool		pick_up_fork(int fork_type, t_philo **philo);
+void		put_back_forks(t_philo **philo);
+
+
+
 long long	milli_to_micro(int milliseconds);
 int			micro_to_milli(long long microseconds);
 long long	current_time(void);
@@ -67,9 +77,9 @@ long long	time_since_start(long long start_time);
 void		usleep_better(long long microseconds);
 void		philo_sleep(t_philo **philo);
 void		philo_eat(t_philo **philo);
+void		philo_die(t_philo **philo);
+void		philo_starve(t_philo **philo);
 
-
-void		die(t_philo **philo);
 bool		am_i_dead(t_philo **philo);
 bool		death_check(t_args *specs);
 

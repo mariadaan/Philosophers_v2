@@ -33,3 +33,28 @@ void	philo_eat(t_philo **philo)
 	else
 		usleep_better((*philo)->specs->time_to_eat_micro);
 }
+
+/*
+	let philo die and print die, only if it's the first one who died
+*/
+void	philo_die(t_philo **philo)
+{
+	(*philo)->dead = true;
+	pthread_mutex_lock(&((*philo)->specs->death_mutex));
+	if ((*philo)->specs->anyone_dead)
+	{
+		pthread_mutex_unlock(&((*philo)->specs->death_mutex));
+		return ;
+	}	
+	(*philo)->specs->anyone_dead = true;
+	pthread_mutex_unlock(&((*philo)->specs->death_mutex));
+	formatted_print(DIED, (*philo)->specs, (*philo)->i_philo + 1);
+	return ;
+}
+
+void	philo_starve(t_philo **philo)
+{
+	usleep_better((*philo)->specs->time_to_die_micro);
+	pthread_mutex_unlock(&(*philo)->specs->forks[i_left_fork(*philo)]);
+	philo_die(philo);
+}
