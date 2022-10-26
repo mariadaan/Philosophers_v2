@@ -49,6 +49,7 @@ int	fill_specs(t_args *specs, char **input)
 	specs->time_to_sleep_micro = milli_to_micro(specs->time_to_sleep);
 	specs->forks = malloc(sizeof(pthread_mutex_t) * specs->num_philos);
 	pthread_mutex_init(&(specs->death_mutex), NULL);
+	pthread_mutex_init(&(specs->print_mutex), NULL);
 	specs->anyone_dead = false;
 	specs->start_time = current_time();
 	return (1);

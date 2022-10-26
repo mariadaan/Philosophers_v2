@@ -49,19 +49,3 @@ bool	death_check(t_args *specs)
 	pthread_mutex_unlock(&(specs->death_mutex));
 	return (false);
 }
-
-void *monitor_deaths(void *arg)
-{
-	t_args	*specs;
-
-	specs = arg;
-	// while (1)
-	// {
-	// 	if (death_check(specs))
-	// 	{
-	// 		end_simulation(specs);
-	// 		break ;
-	// 	}
-	// }
-	return (NULL);
-}

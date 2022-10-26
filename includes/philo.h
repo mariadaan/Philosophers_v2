@@ -35,6 +35,8 @@ typedef struct s_args
 	long long		start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	death_mutex;
+	pthread_mutex_t	print_mutex;
+
 	bool			anyone_dead;
 }		t_args;
 
@@ -51,11 +53,9 @@ typedef struct s_philo
 int			save_input(int argc, char **input, t_args *specs);
 t_philo		*init_philos(t_args *specs);
 void		run_simulation(t_args *specs, t_philo **philos);
-// void		end_simulation(t_args *specs);
 void		wait_for_threads(pthread_t **threads_ptr, int num_philos);
 void		destroy_forks(pthread_mutex_t **forks, int num_philos);
 void		*routine(void *arg);
-void		*monitor_deaths(void *arg);
 
 /* utils */
 int			i_left_fork(t_philo *philo);
@@ -66,12 +66,16 @@ long long	current_time(void);
 long long	time_since_start(long long start_time);
 void		usleep_better(long long microseconds);
 void		philo_sleep(t_philo **philo);
+void		philo_eat(t_philo **philo);
+
 
 void		die(t_philo **philo);
 bool		am_i_dead(t_philo **philo);
 bool		death_check(t_args *specs);
 
 void		formatted_print(int message_enum, t_args *specs, int philo_num);
+void		protected_print(int message_enum, t_philo **philo);
+
 
 /* lib_utils */
 bool		is_pos_int(char *num_str);

@@ -16,7 +16,8 @@ void	eat_philo(t_philo **philo)
 		return ;
 	}
 	// alleen printen dat ie vork gepakt heeft als er niemand dood is
-	formatted_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
+	// formatted_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
+	protected_print(FORK, philo);
 
 	if ((*philo)->specs->num_philos == 1)
 	{
@@ -34,13 +35,15 @@ void	eat_philo(t_philo **philo)
 		return ;
 	}
 	// alleen printen dat ie vork gepakt heeft als er niemand dood is
-	formatted_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
+	// formatted_print(FORK, (*philo)->specs, (*philo)->i_philo + 1);
+	protected_print(FORK, philo);
 
 
 	// eat for time_to_eat milliseconds
-	formatted_print(EATING, (*philo)->specs, (*philo)->i_philo + 1);
+	// formatted_print(EATING, (*philo)->specs, (*philo)->i_philo + 1);
+	protected_print(EATING, philo);
 	(*philo)->meal_time = current_time();
-	philo_sleep(philo);
+	philo_eat(philo);
 
 	// put forks back
 	pthread_mutex_unlock(&(*philo)->specs->forks[i_left_fork(*philo)]); // left fork
@@ -57,7 +60,8 @@ void	sleep_philo(t_philo **philo)
 	am_i_dead(philo);
 	if (death_check((*philo)->specs))
 		return ;
-	formatted_print(SLEEPING, (*philo)->specs, (*philo)->i_philo + 1);
+	// formatted_print(SLEEPING, (*philo)->specs, (*philo)->i_philo + 1);
+	protected_print(SLEEPING, philo);
 	philo_sleep(philo);
 }
 
@@ -76,7 +80,8 @@ void *routine(void *arg)
 		am_i_dead(&philo);
 		if (death_check(philo->specs))
 			return (NULL);
-		formatted_print(THINKING, philo->specs, philo->i_philo + 1);
+		// formatted_print(THINKING, philo->specs, philo->i_philo + 1);
+		protected_print(THINKING, &philo);
 		// avoid death lock by making even numbers wait a tiny bit
 		if (philo->i_philo % 2 == 0)
 			usleep_better(200);
