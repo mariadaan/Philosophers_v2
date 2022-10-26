@@ -65,7 +65,9 @@ int			micro_to_milli(long long microseconds);
 long long	current_time(void);
 long long	time_since_start(long long start_time);
 void		usleep_better(long long microseconds);
+void		philo_sleep(t_philo **philo);
 
+void		die(t_philo **philo);
 bool		am_i_dead(t_philo **philo);
 bool		death_check(t_args *specs);
 

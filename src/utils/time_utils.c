@@ -1,5 +1,5 @@
 #include <sys/time.h>
-#include "philo.h" // take out 
+#include <unistd.h>
 
 long long	milli_to_micro(int milliseconds)
 {

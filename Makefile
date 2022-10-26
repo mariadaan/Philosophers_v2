@@ -9,6 +9,7 @@ SRCS =			main.c				\
 				find_fork.c			\
 				time_utils.c		\
 				print_utils.c		\
+				philo_utils.c		\
 				death_check.c		\
 				\
 				ft_atoi.c			\
