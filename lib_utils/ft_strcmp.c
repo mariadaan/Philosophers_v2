@@ -6,10 +6,9 @@
 /*   By: mdaan <mdaan@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 13:01:35 by mdaan         #+#    #+#                 */
-/*   Updated: 2022/05/05 16:45:37 by mdaan         ########   odam.nl         */
+/*   Updated: 2022/10/26 17:03:35 by mdaan         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 /*
 **	Description:
@@ -22,7 +21,6 @@
 **	<0 if s1 < s2
 **	(s1[char] - s2[char] on the first char that is different)
 */
-
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	unsigned int	i;
