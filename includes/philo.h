@@ -6,7 +6,7 @@
 /*   By: mdaan <mdaan@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 17:01:01 by mdaan         #+#    #+#                 */
-/*   Updated: 2022/10/26 18:13:22 by mdaan         ########   odam.nl         */
+/*   Updated: 2022/10/26 18:22:39 by mdaan         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,44 +67,44 @@ typedef struct s_philo
 	t_args			*specs;
 }		t_philo;
 
-/* init_input.c */
+/* init_input */
 int			save_input(int argc, char **input, t_args *specs);
 t_philo		*init_philos(t_args *specs);
 void		init_forks(t_args *specs);
 
-/* run_simulation.c */
+/* run_simulation */
 int			run_simulation(t_args *specs, t_philo **philos);
 void		wait_for_threads(pthread_t **threads_ptr, int num_philos);
 int			create_threads(pthread_t **threads_ptr, t_philo **philos,
 				int num_philos);
 
-/* routine.c */
+/* routine */
 void		*routine(void *arg);
 void		eat_philo(t_philo **philo);
 void		sleep_philo(t_philo **philo);
 
-/* death_check.c */
+/* death_check */
 bool		am_i_dead(t_philo **philo);
 bool		death_check(t_args *specs);
 
-/* fork_utils.c */
+/* fork_utils */
 int			i_left_fork(t_philo *philo);
 int			i_right_fork(t_philo *philo);
 bool		pick_up_fork(int fork_type, t_philo **philo);
 void		put_back_forks(t_philo **philo);
 void		destroy_forks(pthread_mutex_t **forks, int num_philos);
 
-/* philo_utils.c */
+/* philo_utils */
 void		philo_sleep(t_philo **philo);
 void		philo_eat(t_philo **philo);
 void		philo_die(t_philo **philo);
 void		philo_starve(t_philo **philo);
 
-/* print_utils.c */
+/* print_utils */
 void		formatted_print(int message_enum, t_args *specs, int philo_num);
 void		protected_print(int message_enum, t_philo **philo);
 
-/* time_utils.c */
+/* time_utils */
 long long	milli_to_micro(int milliseconds);
 int			micro_to_milli(long long microseconds);
 long long	current_time(void);
