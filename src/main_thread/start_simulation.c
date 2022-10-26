@@ -52,4 +52,5 @@ void	run_simulation(t_args *specs, t_philo **philos)
 		return ;
 	wait_for_threads(&threads, &mon_thread, specs->num_philos);
 	destroy_forks(&(specs->forks), specs->num_philos);
+	pthread_mutex_destroy(&(specs->death_mutex));
 }

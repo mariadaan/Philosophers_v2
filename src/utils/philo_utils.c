@@ -1,5 +1,9 @@
 #include "philo.h"
 
+/*
+	Calculate how long a philo can sleep.
+	If philo dies during sleep time, sleep until die time.
+*/
 void	philo_sleep(t_philo **philo)
 {
 	long long	sleep_time;
