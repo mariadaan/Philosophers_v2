@@ -8,6 +8,7 @@
 	- print is eating
 	- save start of meal in meal_time
 	- eat (eating time long or until dead)
+	- update number of meals
 	- put forks back
 */
 void	eat_philo(t_philo **philo)
@@ -23,6 +24,7 @@ void	eat_philo(t_philo **philo)
 	protected_print(EATING, philo);
 	(*philo)->meal_time = current_time();
 	philo_eat(philo);
+	(*philo)->eaten_meals += 1;
 	put_back_forks(philo);
 }
 
@@ -55,8 +57,11 @@ void	*routine(void *arg)
 			return (NULL);
 		protected_print(THINKING, &philo);
 		if (philo->i_philo % 2 == 0)
-			usleep_better(200);
+			usleep_better(50);
 		eat_philo(&philo);
+		if (philo->specs->num_meals != -1
+			&& philo->eaten_meals >= philo->specs->num_meals)
+			return (NULL);
 		sleep_philo(&philo);
 	}
 	return (NULL);

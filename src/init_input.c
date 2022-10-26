@@ -18,6 +18,7 @@ t_philo	*init_philos(t_args *specs)
 		philos[i_philo].eaten_meals = 0;
 		philos[i_philo].meal_time = specs->start_time;
 		philos[i_philo].dead = false;
+		philos[i_philo].full = false;
 		philos[i_philo].specs = specs;
 		i_philo++;
 	}
@@ -36,7 +37,7 @@ void	init_forks(t_args *specs)
 	}
 }
 
-int	fill_specs(t_args *specs, char **input)
+int	fill_specs(int argc, t_args *specs, char **input)
 {
 	specs->num_philos = ft_atoi(input[1]);
 	if (specs->num_philos < 1 || specs->num_philos > THREAD_LIMIT)
@@ -44,6 +45,9 @@ int	fill_specs(t_args *specs, char **input)
 	specs->time_to_die = ft_atoi(input[2]);
 	specs->time_to_eat = ft_atoi(input[3]);
 	specs->time_to_sleep = ft_atoi(input[4]);
+	specs->num_meals = -1;
+	if (argc == 6)
+		specs->num_meals = ft_atoi(input[5]);
 	specs->time_to_die_micro = milli_to_micro(specs->time_to_die);
 	specs->time_to_eat_micro = milli_to_micro(specs->time_to_eat);
 	specs->time_to_sleep_micro = milli_to_micro(specs->time_to_sleep);
@@ -67,7 +71,7 @@ int	save_input(int argc, char **input, t_args *specs)
 {
 	if (argc < 5
 		|| !is_all_pos_ints(argc - 1, input + 1)
-		|| !fill_specs(specs, input))
+		|| !fill_specs(argc, specs, input))
 	{
 		printf("%s\n", "ERROR: invalid input\n\n"
 			"expected usage:       ./philo <number_of_philosophers>"

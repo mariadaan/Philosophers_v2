@@ -34,11 +34,12 @@ typedef struct s_args
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
+	int				num_meals;
 	long long		time_to_die_micro;
 	long long		time_to_eat_micro;
 	long long		time_to_sleep_micro;
 	long long		start_time;
-	pthread_mutex_t	*forks; // malloced
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	death_mutex;
 	bool			anyone_dead;
 }		t_args;
@@ -48,6 +49,7 @@ typedef struct s_philo
 	int				i_philo;
 	int				eaten_meals;
 	bool			dead;
+	bool			full;
 	long long		meal_time;
 	t_args			*specs;
 }		t_philo;
@@ -82,6 +84,8 @@ void		philo_starve(t_philo **philo);
 
 bool		am_i_dead(t_philo **philo);
 bool		death_check(t_args *specs);
+bool		am_i_full(t_philo **philo);
+
 
 void		formatted_print(int message_enum, t_args *specs, int philo_num);
 void		protected_print(int message_enum, t_philo **philo);
