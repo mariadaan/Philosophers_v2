@@ -27,6 +27,21 @@ int	create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
 }
 
 /*
+	Wait for all threads to finish
+*/
+void	wait_for_threads(pthread_t **threads_ptr, int num_philos)
+{
+	int	i_philo;
+
+	i_philo = 0;
+	while (i_philo < num_philos)
+	{
+		pthread_join((*threads_ptr)[i_philo], NULL);
+		i_philo++;
+	}
+}
+
+/*
 	Create threads and start simulation
 */
 void	run_simulation(t_args *specs, t_philo **philos)

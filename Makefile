@@ -1,10 +1,8 @@
 NAME =			philo
-VPATH =			./src/ ./src/init ./src/main_thread ./src/monitoring_thread \
-				 ./src/philo_thread ./src/utils ./lib_utils/ ./obj/ ./debug
+VPATH =			./src/ ./src/utils ./lib_utils/ ./obj/ ./debug
 SRCS =			main.c				\
 				init_input.c		\
-				start_simulation.c	\
-				end_simulation.c	\
+				run_simulation.c	\
 				routine.c			\
 				fork_utils.c		\
 				time_utils.c		\
