@@ -3,7 +3,7 @@
 /*
 	Wait for all threads to finish
 */
-void	wait_for_threads(pthread_t **threads_ptr, pthread_t *mon_thread, int num_philos)
+void	wait_for_threads(pthread_t **threads_ptr, int num_philos)
 {
 	int	i_philo;
 
@@ -13,7 +13,6 @@ void	wait_for_threads(pthread_t **threads_ptr, pthread_t *mon_thread, int num_ph
 		pthread_join((*threads_ptr)[i_philo], NULL);
 		i_philo++;
 	}
-	pthread_join(*mon_thread, NULL);
 }
 
 /*
@@ -31,10 +30,10 @@ void	destroy_forks(pthread_mutex_t **forks, int num_philos)
 	}
 }
 
-/*
-	stop all threads
-*/
-void	end_simulation(t_args *specs)
-{
-	printf("someone died. simulation stop here\n");
-}
+// /*
+// 	stop all threads
+// */
+// void	end_simulation(t_args *specs)
+// {
+// 	printf("someone died. simulation stop here\n");
+// }

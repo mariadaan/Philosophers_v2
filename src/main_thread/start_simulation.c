@@ -45,12 +45,10 @@ int		create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
 void	run_simulation(t_args *specs, t_philo **philos)
 {
 	pthread_t	*threads;
-	pthread_t	mon_thread;
 
-	if (!create_mon_thread(&mon_thread, specs)
-		|| !create_threads(&threads, philos, specs->num_philos))
+	if (!create_threads(&threads, philos, specs->num_philos))
 		return ;
-	wait_for_threads(&threads, &mon_thread, specs->num_philos);
+	wait_for_threads(&threads, specs->num_philos);
 	destroy_forks(&(specs->forks), specs->num_philos);
 	pthread_mutex_destroy(&(specs->death_mutex));
 }
