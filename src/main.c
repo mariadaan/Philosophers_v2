@@ -6,7 +6,7 @@
 /*   By: mdaan <mdaan@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 17:03:02 by mdaan         #+#    #+#                 */
-/*   Updated: 2022/10/26 17:03:02 by mdaan         ########   odam.nl         */
+/*   Updated: 2022/10/26 18:19:26 by mdaan         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ int	main(int argc, char **argv)
 	t_philo	*philos;
 
 	if (!save_input(argc, argv, &specs))
-		return (EXITCODE_FAIL);
+		return (EXIT_FAILURE);
 	philos = init_philos(&specs);
+	if (!philos)
+		return (EXIT_FAILURE);
 	print_args(specs);
-	printf("\nSTART SIMULATION\n");
-	run_simulation(&specs, &philos);
-	return (EXITCODE_SUCCESS);
+	if (!run_simulation(&specs, &philos))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

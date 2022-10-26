@@ -6,7 +6,7 @@
 /*   By: mdaan <mdaan@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 17:00:19 by mdaan         #+#    #+#                 */
-/*   Updated: 2022/10/26 17:00:21 by mdaan         ########   odam.nl         */
+/*   Updated: 2022/10/26 18:18:32 by mdaan         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_philo	*init_philos(t_args *specs)
 	int		i_philo;
 
 	philos = (t_philo *)malloc(sizeof(t_philo) * specs->num_philos);
+	if (!philos)
+		return (NULL);
 	i_philo = 0;
 	while (i_philo < specs->num_philos)
 	{
@@ -64,6 +66,8 @@ int	fill_specs(int argc, t_args *specs, char **input)
 	specs->time_to_eat_micro = milli_to_micro(specs->time_to_eat);
 	specs->time_to_sleep_micro = milli_to_micro(specs->time_to_sleep);
 	specs->forks = malloc(sizeof(pthread_mutex_t) * specs->num_philos);
+	if (!specs->forks)
+		return (0);
 	init_forks(specs);
 	pthread_mutex_init(&(specs->death_mutex), NULL);
 	specs->anyone_dead = false;

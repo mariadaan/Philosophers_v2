@@ -6,7 +6,7 @@
 /*   By: mdaan <mdaan@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 17:02:55 by mdaan         #+#    #+#                 */
-/*   Updated: 2022/10/26 17:02:55 by mdaan         ########   odam.nl         */
+/*   Updated: 2022/10/26 17:37:05 by mdaan         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int	create_threads(pthread_t **threads_ptr, t_philo **philos, int num_philos)
 		result_code = pthread_create(&(*threads_ptr)[i_philo], NULL,
 				routine, &(*philos)[i_philo]);
 		if (result_code)
+		{
+			free(*threads_ptr);
 			return (error_msg("error creating thread\n", 0));
+		}
 		i_philo++;
 	}
 	return (1);
@@ -58,16 +61,21 @@ void	wait_for_threads(pthread_t **threads_ptr, int num_philos)
 /*
 	Create threads and start simulation
 */
-void	run_simulation(t_args *specs, t_philo **philos)
+int	run_simulation(t_args *specs, t_philo **philos)
 {
 	pthread_t	*threads;
 
 	if (!create_threads(&threads, philos, specs->num_philos))
-		return ;
+	{
+		free(specs->forks);
+		free(*philos);
+		return (0);
+	}
 	wait_for_threads(&threads, specs->num_philos);
 	destroy_forks(&(specs->forks), specs->num_philos);
 	pthread_mutex_destroy(&(specs->death_mutex));
 	free(specs->forks);
 	free(*philos);
 	free(threads);
+	return (1);
 }

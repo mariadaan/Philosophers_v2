@@ -6,7 +6,7 @@
 #    By: mdaan <mdaan@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/26 17:01:03 by mdaan         #+#    #+#                  #
-#    Updated: 2022/10/26 17:01:05 by mdaan         ########   odam.nl          #
+#    Updated: 2022/10/26 18:16:35 by mdaan         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,13 @@ SRCS =			main.c				\
 OBJS =			$(SRCS:.c=.o)
 OBJ_DIR =		./obj/
 INCL_DIR =		 ./includes
-CFLAGS =		-fsanitize=thread -Wall -Werror -Wextra -I${INCL_DIR}
+CFLAGS =		-Wall -Wextra -Werror -I${INCL_DIR}
 CC =			gcc
 
 ifdef WITH_SANITIZER
 	CFLAGS =	-fsanitize=thread -g -Wall -Wextra -I${INCL_DIR}
 else
-	CFLAGS =	-g -Wall -Wextra -I${INCL_DIR}
+	CFLAGS =	-Wall -Wextra -Werror -I${INCL_DIR}
 endif
 
 all: $(NAME)
@@ -61,13 +61,8 @@ fclean:	clean
 
 re:	fclean $(NAME)
 
-
-# debug rules:
 debug:	all
 	./philo 3 205 200 200 3
-
-# to do: zorgen dat ie oneindig door blijft gaan bij een lange time to die
-# nu stopt ie altijd na dat aantal seconden.
 
 sanitize:	all
 	$(MAKE) WITH_SANITIZER=1 re

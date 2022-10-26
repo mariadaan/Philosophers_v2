@@ -6,7 +6,7 @@
 /*   By: mdaan <mdaan@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 17:01:01 by mdaan         #+#    #+#                 */
-/*   Updated: 2022/10/26 17:07:05 by mdaan         ########   odam.nl         */
+/*   Updated: 2022/10/26 18:13:22 by mdaan         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@
 # include <pthread.h>
 # include <stdio.h>
 
-# define EXITCODE_SUCCESS 0
-# define EXITCODE_FAIL 1
-
-# define THREAD_LIMIT 8000
+# define THREAD_LIMIT 1000
 
 # define LEFT_FORK 1
 # define RIGHT_FORK 2
@@ -34,10 +31,12 @@ enum e_type
 	SLEEPING,
 	THINKING,
 	DIED,
-	DONE_SLEEPING,
-	DONE_EATING,
 };
 
+/*
+	The specs that are initilized in the main process
+	Every thread shares this data
+*/
 typedef struct s_args
 {
 	int				num_philos;
@@ -54,6 +53,10 @@ typedef struct s_args
 	bool			anyone_dead;
 }		t_args;
 
+/*
+	The information that is specific to every philosopher
+	Has pointer to the shared data
+*/
 typedef struct s_philo
 {
 	int				i_philo;
@@ -64,42 +67,49 @@ typedef struct s_philo
 	t_args			*specs;
 }		t_philo;
 
-/* src */
+/* init_input.c */
 int			save_input(int argc, char **input, t_args *specs);
 t_philo		*init_philos(t_args *specs);
-void		run_simulation(t_args *specs, t_philo **philos);
-void		wait_for_threads(pthread_t **threads_ptr, int num_philos);
-void		destroy_forks(pthread_mutex_t **forks, int num_philos);
-void		*routine(void *arg);
+void		init_forks(t_args *specs);
 
-/* utils */
+/* run_simulation.c */
+int			run_simulation(t_args *specs, t_philo **philos);
+void		wait_for_threads(pthread_t **threads_ptr, int num_philos);
+int			create_threads(pthread_t **threads_ptr, t_philo **philos,
+				int num_philos);
+
+/* routine.c */
+void		*routine(void *arg);
+void		eat_philo(t_philo **philo);
+void		sleep_philo(t_philo **philo);
+
+/* death_check.c */
+bool		am_i_dead(t_philo **philo);
+bool		death_check(t_args *specs);
+
+/* fork_utils.c */
 int			i_left_fork(t_philo *philo);
 int			i_right_fork(t_philo *philo);
-bool		get_left_fork(t_philo **philo);
-bool		get_right_fork(t_philo **philo);
 bool		pick_up_fork(int fork_type, t_philo **philo);
 void		put_back_forks(t_philo **philo);
+void		destroy_forks(pthread_mutex_t **forks, int num_philos);
 
-
-
-long long	milli_to_micro(int milliseconds);
-int			micro_to_milli(long long microseconds);
-long long	current_time(void);
-long long	time_since_start(long long start_time);
-void		usleep_better(long long microseconds);
+/* philo_utils.c */
 void		philo_sleep(t_philo **philo);
 void		philo_eat(t_philo **philo);
 void		philo_die(t_philo **philo);
 void		philo_starve(t_philo **philo);
 
-bool		am_i_dead(t_philo **philo);
-bool		death_check(t_args *specs);
-bool		am_i_full(t_philo **philo);
-
-
+/* print_utils.c */
 void		formatted_print(int message_enum, t_args *specs, int philo_num);
 void		protected_print(int message_enum, t_philo **philo);
 
+/* time_utils.c */
+long long	milli_to_micro(int milliseconds);
+int			micro_to_milli(long long microseconds);
+long long	current_time(void);
+long long	time_since_start(long long start_time);
+void		usleep_better(long long microseconds);
 
 /* lib_utils */
 bool		is_pos_int(char *num_str);
