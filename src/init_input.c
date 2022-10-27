@@ -6,7 +6,7 @@
 /*   By: mdaan <mdaan@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 17:00:19 by mdaan         #+#    #+#                 */
-/*   Updated: 2022/10/26 18:18:32 by mdaan         ########   odam.nl         */
+/*   Updated: 2022/10/27 09:51:40 by mdaan         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	fill_specs(int argc, t_args *specs, char **input)
 */
 int	save_input(int argc, char **input, t_args *specs)
 {
-	if (argc < 5
+	if (argc < 5 || argc > 6
 		|| !is_all_pos_ints(argc - 1, input + 1)
 		|| !fill_specs(argc, specs, input))
 	{
