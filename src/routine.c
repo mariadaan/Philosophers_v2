@@ -6,7 +6,7 @@
 /*   By: mdaan <mdaan@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 17:02:58 by mdaan         #+#    #+#                 */
-/*   Updated: 2022/10/26 17:02:58 by mdaan         ########   odam.nl         */
+/*   Updated: 2022/10/27 09:37:27 by mdaan         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = arg;
+	if (philo->i_philo % 2 == 0)
+		usleep_better(50);
 	while (!death_check(philo->specs))
 	{
 		am_i_dead(&philo);
 		if (death_check(philo->specs))
 			return (NULL);
 		protected_print(THINKING, &philo);
-		if (philo->i_philo % 2 == 0)
-			usleep_better(50);
 		eat_philo(&philo);
 		if (philo->specs->num_meals != -1
 			&& philo->eaten_meals >= philo->specs->num_meals)

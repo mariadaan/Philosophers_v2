@@ -6,7 +6,7 @@
 /*   By: mdaan <mdaan@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/26 17:02:51 by mdaan         #+#    #+#                 */
-/*   Updated: 2022/10/26 17:02:52 by mdaan         ########   odam.nl         */
+/*   Updated: 2022/10/27 09:37:33 by mdaan         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	usleep_better(long long microseconds)
 
 	start_time = current_time();
 	while (current_time() - start_time < microseconds)
-		usleep(250);
+		usleep(100);
 }
